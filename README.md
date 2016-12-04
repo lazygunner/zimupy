@@ -1,2 +1,2 @@
 # zimupy
-ZiMuZu non official Python SDK
+ZiMuZu Non-official Python SDK
