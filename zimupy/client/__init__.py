@@ -14,7 +14,13 @@ from zimupy.client import api
 class ZiMuZuClient(ZiMuZu):
 
     resource = api.Resource()
-    base_url = 'http://api.ousns.net/'
+    base_url = ''
 
-    def __init__(self, access_key, cid):
+    def __init__(self, access_key, cid, base_url=None):
+        if base_url:
+            self.base_url = base_url
+        else:
+            with open('base_url') as s:
+                base_url = s.readline()
+                self.base_url = base_url
         super(ZiMuZuClient, self).__init__(access_key, cid)
