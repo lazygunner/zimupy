@@ -116,7 +116,6 @@ class ZiMuZu(object):
                 raise ZiMuZuException(code=None, message=None)
 
             if not isinstance(rsp, dict):
-                print(rsp.content)
                 ret = json.loads(rsp.content.decode('utf-8'))
             else:
                 ret = rsp
@@ -124,7 +123,7 @@ class ZiMuZu(object):
             if 'status' in ret and ret['status'] != 0:
                 code = ret['status']
                 message = ret['info']
-                if code in (ErrorCode.AccessKeyError,):
+                if code:
                     raise ZiMuZuException(code, message)
 
             return ret['data']

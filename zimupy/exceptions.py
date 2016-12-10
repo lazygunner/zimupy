@@ -1,20 +1,40 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import absolute_import, unicode_literals
+import six
+
+from zimupy.utils import to_binary, to_text
 
 
 class ZiMuZuException(Exception):
     """Base exception for ZiMuZu"""
 
     def __init__(self, code, message):
-        self.code = code
-        self.message = message
+        self.errcode = code
+        self.errmsg = message
 
     def __str__(self):
-        return 'Exception Code: {code}, Message: {msg}'.format(
-            code=self.code,
-            msg=self.message,
+        if six.PY2:
+            return to_binary('Error code: {code}, message: {msg}'.format(
+                code=self.errcode,
+                msg=self.errmsg
+            ))
+        else:
+            return to_text('Error code: {code}, message: {msg}'.format(
+                code=self.errcode,
+                msg=self.errmsg
+            ))
+
+    def __repr__(self):
+        _repr = '{klass}({code}, {msg}'.format(
+            klass=self.__class__.__name__,
+            code=self.errcode,
+            msg=self.errmsg
         )
+        if six.PY2:
+            return to_binary(_repr)
+        else:
+            return to_text(_repr)
 
 
 class InvalidParameterException(ZiMuZuException):

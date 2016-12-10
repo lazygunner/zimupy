@@ -292,3 +292,115 @@ class Resource(BaseZiMuZuAPI):
         )
 
         return ret
+
+    def top(self, channel=None, limit=None):
+        """
+        今日热门排行
+        :param channel: 频道 默认为电影和电视剧的排行榜  tv-电视剧 movie-电影
+        :param limit: 获取数量,默认为5个
+        :return:
+        [
+            {
+                u'area': u'\u7f8e\u56fd',
+                u'category': u'\u559c\u5267',
+                u'channel': u'tv',
+                u'cnname': u'\u751f\u6d3b\u5927\u7206\u70b8',
+                u'id': u'11005',
+                u'play_status': u'\u7b2c10\u5b63\u8fde\u8f7d\u4e2d',
+                u'poster': u'http://tu.rrsub.com/ftp/2016/0918/5fe879713ff39c362d727eb64345c238.jpg',
+                u'poster_a': u'http://tu.rrsub.com/ftp/2016/0918/a_5fe879713ff39c362d727eb64345c238.jpg',
+                u'poster_b': u'http://tu.rrsub.com/ftp/2016/0918/b_5fe879713ff39c362d727eb64345c238.jpg',
+                u'poster_m': u'http://tu.rrsub.com/ftp/2016/0918/m_5fe879713ff39c362d727eb64345c238.jpg',
+                u'poster_s': u'http://tu.rrsub.com/ftp/2016/0918/s_5fe879713ff39c362d727eb64345c238.jpg',
+                u'publish_year': u'2007'
+            },
+            {
+                u'area': u'\u7f8e\u56fd',
+                u'category': u'\u5267\u60c5/\u9b54\u5e7b/\u5192\u9669',
+                u'channel': u'movie',
+                u'cnname': u'\u4f69\u5c0f\u59d0\u7684\u5947\u5e7b\u57ce\u5821',
+                u'id': u'34925',
+                u'play_status': u'\u5df2\u4e0a\u6620',
+                u'poster': u'http://tu.rrsub.com/ftp/2016/1205/3b439ec55f917d32afb7f840c938432f.jpg',
+                u'poster_a': u'http://tu.rrsub.com/ftp/2016/1205/a_3b439ec55f917d32afb7f840c938432f.jpg',
+                u'poster_b': u'http://tu.rrsub.com/ftp/2016/1205/b_3b439ec55f917d32afb7f840c938432f.jpg',
+                u'poster_m': u'http://tu.rrsub.com/ftp/2016/1205/m_3b439ec55f917d32afb7f840c938432f.jpg',
+                u'poster_s': u'http://tu.rrsub.com/ftp/2016/1205/s_3b439ec55f917d32afb7f840c938432f.jpg',
+                u'publish_year': u'2016'
+            },
+            ...
+        ]
+        """
+        url = 'resource/top'
+        params = {}
+
+        if channel:
+            params.update({'channel': channel})
+        if limit:
+            params.update({'limit': limit})
+
+        ret = self._get(
+            url,
+            params=params
+        )
+
+        return ret
+
+    def today(self):
+        """
+        今日更新
+        :return:
+        [
+            {
+                u'channel': u'tv',
+                u'cnname': u'\u65b0\u767e\u6218\u5929\u9f99',
+                u'episode': u'10',
+                u'format': u'MP4',
+                u'id': u'283919',
+                u'name': u'\u65b0\u767e\u6218\u5929\u9f99.MacGyver.S01E10.\
+                    \u4e2d\u82f1\u5b57\u5e55.HDTVrip.1024X576.mp4',
+                u'resourceid': u'34669',
+                u'season': u'1',
+                u'size': u'409.94MB',
+                u'ways': {
+                    u'1': u'ed2k://|file|%E6%96%B0%E7%99%BE%E6%88%98%E5%\
+                        A4%A9%E9%BE%99.MacGyver.S01E10.%E4%B8%AD%E8%8B%B1%E5%AD\
+                        %97%E5%B9%95.HDTVrip.1024X576.mp4|429857208|6e31c08a911d0\
+                        7a09dfb022f6d712a56|h=5n4ofbkwv53qo6k4myfky4qgxxm3fidd|/',
+                    u'2': u'magnet:?xt=urn:btih:651f22e1c6f1e4ccfd851b594475\
+                        64b47a2f5b53&tr=http://tracker.openbittorrent.com\
+                        /announce&tr=udp://tracker.openbittorrent.com:80\
+                        /announce&tr=udp://tr.cili001.com:6666/\
+                        announce&tr=http://tracker.publicbt.com/\
+                        announce&tr=udp://open.demonii.com:1337&tr=udp://\
+                        tracker.opentrackr.org:1337/announce&tr=http://\
+                        tr.cili001.com:6666/announce'
+                    }
+                },
+            {
+                u'channel': u'tv',
+                u'cnname': u'\u5438\u8840\u9b3c\u65e5\u8bb0',
+                u'episode': u'7',
+                u'format': u'HR-HDTV',
+                u'id': u'283918',
+                u'name': u'\u5438\u8840\u9b3c\u65e5\u8bb0.The....',
+                u'resourceid': u'10985',
+                u'season': u'8',
+                u'size': u'400.86MB',
+                u'ways': {
+                    u'1': u'ed2k://|fil...',
+                    u'2': u'magnet:?xt=urn:btih:a...'
+                }
+            },
+        ]
+        """
+
+        url = 'resource/today'
+        params = {}
+
+        ret = self._get(
+            url,
+            params=params
+        )
+
+        return ret

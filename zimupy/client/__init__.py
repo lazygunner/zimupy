@@ -14,6 +14,7 @@ from zimupy.client import api
 class ZiMuZuClient(ZiMuZu):
 
     resource = api.Resource()
+    common = api.Common()
     base_url = ''
 
     def __init__(self, access_key, cid, base_url=None):
