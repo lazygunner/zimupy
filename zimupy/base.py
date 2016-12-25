@@ -123,7 +123,7 @@ class ZiMuZu(object):
             if 'status' in ret and ret['status'] != 0:
                 code = ret['status']
                 message = ret['info']
-                if code:
+                if code and message != '':
                     raise ZiMuZuException(code, message)
 
             return ret['data']
