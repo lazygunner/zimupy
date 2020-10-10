@@ -14,7 +14,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='zimupy',
-    version='0.0.5',
+    version='0.0.7',
     author='lazygunner',
     author_email='gymgunner@gmail.com',
     url='https://github.com/lazygunner/zimupy',

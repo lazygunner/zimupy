@@ -46,7 +46,7 @@ class ZiMuZu(object):
                      cid=None,
                      user_agent=DEFAULT_USER_AGENT,
                      proxy=None,
-                     base_url='http://api.ousns.net/',
+                     base_url='',
                      client=ClientType.iOS,
                      response_type=ResponseType.JSON):
 
@@ -55,12 +55,15 @@ class ZiMuZu(object):
             self.base_url = base_url
             self.client = client
             self.response_type = response_type
+            self.g = 'api/v3'
 
             self.session = requests.Session()
             self.session.headers['User-Agent'] = user_agent
 
             self.request_body = {
-                'access_key': '',
+                'g': 'api/v3',
+                'a': '',
+                'accesskey': '',
                 'cid': self.cid,
                 'timestamp': None,
                 'client': self.client,
@@ -90,7 +93,7 @@ class ZiMuZu(object):
 
             if isinstance(kwargs['params'], dict)\
                     and 'accesskey' not in kwargs['params']:
-                kwargs['params']['accesskey'] = self._gen_access_key(ts)
+                kwargs['params']['accesskey'] = self.access_key
             if isinstance(kwargs['params'], dict)\
                     and 'timestamp' not in kwargs['params']:
                 kwargs['params']['timestamp'] = ts
@@ -103,6 +106,9 @@ class ZiMuZu(object):
             if isinstance(kwargs['params'], dict)\
                     and 'type' not in kwargs['params']:
                 kwargs['params']['type'] = self.response_type
+            if isinstance(kwargs['params'], dict)\
+                    and 'g' not in kwargs['params']:
+                kwargs['params']['g'] = self.g
 
             rsp = self.session.request(
                 method=method,
