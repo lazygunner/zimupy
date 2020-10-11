@@ -96,6 +96,45 @@ class V3(BaseZiMuZuAPI):
 
         return ret
 
+    '''
+    排名
+    '''
+    def hot(self,
+            limit=48
+            ):
+        params = {}
+        params.update({
+            'a': 'hot',
+            'limit': limit
+        })
+
+        ret = self._get(
+            '',
+            params=params
+        )
+
+        return ret
+
+    '''
+    时间表
+    '''
+    def schedule(self,
+                 start,
+                 end):
+        params = {}
+        params.update({
+            'a': 'tv_schedule',
+            'start': start,
+            'end': end
+        })
+
+        ret = self._get(
+            '',
+            params=params
+        )
+
+        return ret
+
     def login(self,
               account,
               password,
